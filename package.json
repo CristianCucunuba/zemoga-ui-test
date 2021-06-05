@@ -8,6 +8,8 @@
     "start": "next start"
   },
   "dependencies": {
+    "@tailwindcss/line-clamp": "^0.2.1",
+    "date-fns": "^2.22.1",
     "mongodb": "^3.6.9",
     "next": "10.2.3",
     "react": "17.0.2",

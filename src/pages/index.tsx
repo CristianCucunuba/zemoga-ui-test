@@ -1,6 +1,7 @@
 import { GetServerSideProps } from "next";
 import ThumbDown from "@components/ThumbDown";
 import ThumbUp from "@components/ThumbUp";
+import CelebrityCard from "@components/CelebrityCard";
 import { connectToDatabase } from "../utils/mongoDB";
 import { Celebrity } from "../types";
 
@@ -61,9 +62,15 @@ export default function Home({ celebrities }: HomeProps) {
           opinion, we analyze and put the data in a public report.
         </div>
       </div>
-      {/* {celebrities.map((celeb) => (
-        <div key={celeb._id}>{celeb.name}</div>
-      ))} */}
+      {/* Polls section */}
+      <div>
+        <h3 className="mb-4 text-2xl font-light">Previous Rulings</h3>
+        <div className="flex overflow-x-scroll">
+          {celebrities.map((celebrity) => (
+            <CelebrityCard celebrity={celebrity} />
+          ))}
+        </div>
+      </div>
     </div>
   );
 }
