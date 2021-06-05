@@ -49,6 +49,18 @@ export default function Home({ celebrities }: HomeProps) {
           </div>
         </div>
       </div>
+      {/* Banner */}
+      <div className="grid grid-cols-[45%,55%] items-center p-3 mt-6 bg-[#ebebeb]">
+        <div>
+          <p className="text-sm font-light">Speak out. Be heard.</p>
+          <p className="text-2xl font-medium">Be counted</p>
+        </div>
+        <div className="text-sm font-light leading-4 ">
+          Rule of Thumb is a crowd sourced court of public opinion where anyone
+          and everyone can speak out and speak freely. It's easy: You share your
+          opinion, we analyze and put the data in a public report.
+        </div>
+      </div>
       {/* {celebrities.map((celeb) => (
         <div key={celeb._id}>{celeb.name}</div>
       ))} */}
