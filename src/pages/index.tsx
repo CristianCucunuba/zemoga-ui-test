@@ -70,6 +70,40 @@ export default function Home({ celebrities }: HomeProps) {
             <CelebrityCard celebrity={celebrity} />
           ))}
         </div>
+        {/* CTA */}
+        <div
+          className="relative mt-6 text-center"
+          style={{
+            backgroundImage: "url('img/bg-people.png')",
+          }}>
+          <div className="px-8 py-4 bg-white bg-opacity-75">
+            <p className="text-2xl">
+              Is there anyone else you would want us to add
+            </p>
+            <button className="w-full py-2 text-lg border-2 border-gray-700">
+              Submit a name
+            </button>
+          </div>
+        </div>
+        <div className="mt-6 mb-4 border-b-2 border-gray-700 border-dashed"></div>
+        <footer className="flex items-center justify-between mb-8">
+          <ul className="space-y-4 text-sm">
+            <li>Terms and Conditions</li>
+            <li>Privacy Policy</li>
+            <li>Contact Us</li>
+          </ul>
+          <div className="self-end">
+            <span>Follow us</span>
+            <div className="flex">
+              <img
+                src="img/facebook.svg"
+                alt="facebook logo"
+                className="mr-4"
+              />
+              <img src="img/twitter.svg" alt="twitter logo" />
+            </div>
+          </div>
+        </footer>
       </div>
     </div>
   );
