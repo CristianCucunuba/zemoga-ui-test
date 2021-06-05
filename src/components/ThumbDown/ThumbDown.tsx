@@ -1,6 +1,6 @@
 function ThumbDown({ className = "" }) {
   return (
-    <button className={`bg-[#f9ad1d] p-2 ${className}`}>
+    <button className={`bg-[#f9ad1d] p-2 outline-none ${className}`}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         className="mx-auto"

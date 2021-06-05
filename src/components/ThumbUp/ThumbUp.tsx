@@ -1,6 +1,6 @@
 function ThumbUp({ className = "" }) {
   return (
-    <button className={`bg-[#3cbbb4] p-2 ${className}`}>
+    <button className={`bg-[#3cbbb4] outline-none p-2 ${className}`}>
       <svg
         className="mx-auto"
         xmlns="http://www.w3.org/2000/svg"

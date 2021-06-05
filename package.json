@@ -8,6 +8,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@heroicons/react": "^1.0.1",
     "@tailwindcss/line-clamp": "^0.2.1",
     "date-fns": "^2.22.1",
     "mongodb": "^3.6.9",

@@ -52,7 +52,7 @@ function Card({ celebrity }: CardProps) {
             <div className="flex items-center justify-end mt-2 space-x-2 ">
               <ThumbUp />
               <ThumbDown />
-              <button className="px-4 py-2 bg-black border border-white bg-opacity-60">
+              <button className="px-4 py-2 bg-black border border-white outline-none bg-opacity-60">
                 Vote now
               </button>
             </div>

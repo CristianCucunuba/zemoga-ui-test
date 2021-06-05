@@ -11,7 +11,7 @@ interface HomeProps {
 
 export default function Home({ celebrities }: HomeProps) {
   return (
-    <div className="border border-red-700">
+    <div className="">
       {/* Hero */}
       <div
         className="relative bg-center bg-no-repeat bg-cover"
@@ -67,7 +67,7 @@ export default function Home({ celebrities }: HomeProps) {
         <h3 className="mb-4 text-2xl font-light">Previous Rulings</h3>
         <div className="flex overflow-x-scroll">
           {celebrities.map((celebrity) => (
-            <CelebrityCard celebrity={celebrity} />
+            <CelebrityCard celebrity={celebrity} key={celebrity._id} />
           ))}
         </div>
         {/* CTA */}
