@@ -2,4 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer utilities {
+  .triangle {
+    width: 0;
+    height: 0;
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+    border-left: 8px solid #202020;
+    margin-left: -1;
+    align-self: center;
+  }
+}
+
 @import url("https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap");

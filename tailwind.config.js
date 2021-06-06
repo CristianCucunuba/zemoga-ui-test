@@ -9,6 +9,9 @@ module.exports = {
       fontFamily: {
         sans: ["Lato", ...defaultTheme.fontFamily.sans],
       },
+      colors: {
+        "light-gray": "#464646",
+      },
     },
   },
   variants: {

@@ -8,7 +8,7 @@ function Navbar() {
   return (
     <div className="flex flex-col">
       <button className="z-10 self-end" onClick={toggleNavbar}>
-        <img src="img/hamburger.svg" className="w-7" />
+        <img src="img/hamburger.svg" className="w-6" />
       </button>
       <h1 className="-mt-4 text-2xl text-white">Rule of thumb.</h1>
       <div

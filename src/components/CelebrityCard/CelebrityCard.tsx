@@ -47,9 +47,9 @@ function CelebrityCard({ celebrity }: CelebrityCardProps) {
     <div
       className="min-w-[19rem] bg-no-repeat bg-cover h-[18.5rem] text-white relative mr-4 flex items-center"
       style={{
-        backgroundImage: `url(${picture})`,
+        backgroundImage: `linear-gradient(0deg, rgba(0,0,0,0.50) 10%, rgba(0,0,0,0) 80%),url(${picture})`,
       }}>
-      <div className="">
+      <div>
         <div className="mr-8">
           <div className="flex mb-2">
             {positive >= negative ? (
@@ -104,23 +104,23 @@ function CelebrityCard({ celebrity }: CelebrityCardProps) {
       </div>
       <div className="absolute bottom-0 flex justify-between w-full h-9 bg-opacity-70">
         <div
-          className="bg-[#3cbbb4] opacity-80"
+          className="bg-[#3cbbb4] opacity-60"
           style={{
             width: `${positiveVotes}%`,
           }}></div>
         <div
-          className="bg-[#f9ad1d] opacity-80"
+          className="bg-[#f9ad1d] opacity-60"
           style={{
             width: `${negativeVotes}%`,
           }}></div>
         <div className="absolute flex justify-between w-full h-full">
           <div>
-            <ThumbUp />
+            <ThumbUp className="h-full bg-opacity-0" />
             <span className="text-lg">{positiveVotes}%</span>
           </div>
           <div>
             <span className="text-lg">{negativeVotes}%</span>
-            <ThumbDown />
+            <ThumbDown className="h-full bg-opacity-0" />
           </div>
         </div>
       </div>
