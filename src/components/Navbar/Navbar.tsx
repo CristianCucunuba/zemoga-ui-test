@@ -1,18 +1,19 @@
 import { useState } from "react";
 
-function Navbar(props) {
+function Navbar() {
   const [isNavbarOpen, setIsNavbarOpen] = useState(false);
   const toggleNavbar = () => setIsNavbarOpen((isNavbarOpen) => !isNavbarOpen);
   const linkStyles = "text-lg font-bold text-gray-800";
 
   return (
-    <div className="">
-      <button className="" onClick={toggleNavbar}>
+    <div className="flex flex-col">
+      <button className="z-10 self-end" onClick={toggleNavbar}>
         <img src="img/hamburger.svg" className="w-7" />
       </button>
+      <h1 className="-mt-4 text-2xl text-white">Rule of thumb.</h1>
       <div
-        className={`shadow-md bg-gray-50 bottom-0 duration-500 transition-all fixed top-0 z-10 ${
-          isNavbarOpen ? "right-0" : "-right-80"
+        className={`shadow-md bg-gray-50 bottom-0 duration-500 transition-all fixed top-0 z-50 ${
+          isNavbarOpen ? "right-0" : "-right-56"
         }`}>
         <div className="flex justify-end mt-4 mr-4" onClick={toggleNavbar}>
           <svg
@@ -33,7 +34,6 @@ function Navbar(props) {
           <li className={linkStyles}>Login / Sign Up</li>
         </ul>
       </div>
-      <h1 className="text-2xl text-white">Rule of thumb.</h1>
     </div>
   );
 }
