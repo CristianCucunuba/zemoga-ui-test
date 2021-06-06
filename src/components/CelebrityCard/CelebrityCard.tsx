@@ -37,7 +37,7 @@ function CelebrityCard({ celebrity }: CelebrityCardProps) {
       console.error("Please select a type of vote first");
       return;
     }
-    addVote({ celebrityId: _id, vote });
+    addVote.mutate({ celebrityId: _id, vote });
     setVote(null);
   };
 

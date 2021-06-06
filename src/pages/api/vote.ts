@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { ObjectID } from "mongodb";
-import { connectToDatabase } from "src/utils/mongoDB";
+import { connectToDatabase } from "src/db/database";
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method !== "POST") {
@@ -21,8 +21,6 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     res.status(400).send({ message: "The type of vote is incorrect" });
     return;
   }
-
-  console.log({ celebrityId, vote });
 
   const { result, modifiedCount } = await db
     .collection("celebrities")

@@ -1,15 +1,26 @@
+import axios from "axios";
 import { GetServerSideProps } from "next";
+import { useQuery } from "react-query";
 import ThumbDown from "@components/ThumbDown";
 import ThumbUp from "@components/ThumbUp";
 import CelebrityCard from "@components/CelebrityCard";
-import { connectToDatabase } from "../utils/mongoDB";
 import { Celebrity } from "../types";
+import { findCelebrities } from "src/api";
 
 interface HomeProps {
   celebrities: Celebrity[];
 }
 
 export default function Home({ celebrities }: HomeProps) {
+  const { data } = useQuery<Celebrity[]>(
+    "celebrities",
+    async () => {
+      const response = await axios.get("/api/celebrities");
+      return response.data.celebrities;
+    },
+    { initialData: celebrities }
+  );
+
   return (
     <div className="">
       {/* Hero */}
@@ -66,7 +77,7 @@ export default function Home({ celebrities }: HomeProps) {
       <div>
         <h3 className="mb-4 text-2xl font-light">Previous Rulings</h3>
         <div className="flex overflow-x-scroll">
-          {celebrities.map((celebrity) => (
+          {data?.map((celebrity) => (
             <CelebrityCard celebrity={celebrity} key={celebrity._id} />
           ))}
         </div>
@@ -109,15 +120,8 @@ export default function Home({ celebrities }: HomeProps) {
   );
 }
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const { db } = await connectToDatabase();
-  const data = await db.collection("celebrities").find({}).toArray();
-
-  const celebrities = data.map(({ _id, ...celebrity }) => ({
-    _id: _id.toString(),
-    ...celebrity,
-  }));
-
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  const celebrities = await findCelebrities();
   return {
     props: {
       celebrities,

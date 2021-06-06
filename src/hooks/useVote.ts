@@ -1,3 +1,4 @@
+import { useMutation, useQueryClient } from "react-query";
 import axios from "axios";
 
 type AddVoteArgs = {
@@ -6,16 +7,20 @@ type AddVoteArgs = {
 };
 
 function useVote() {
-  const addVote = async ({ celebrityId, vote }: AddVoteArgs) => {
-    try {
-      const { data, status } = await axios.post("/api/vote", {
+  const queryClient = useQueryClient();
+
+  const addVote = useMutation(
+    ({ celebrityId, vote }: AddVoteArgs) =>
+      axios.post("/api/vote", {
         celebrityId,
         vote,
-      });
-    } catch (error) {
-      console.log(error);
+      }),
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries("celebrities");
+      },
     }
-  };
+  );
 
   return {
     addVote,
