@@ -1,6 +1,12 @@
-function ThumbDown({ className = "" }) {
+import { ButtonHTMLAttributes } from "react";
+
+interface ThumbDownProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  className?: string;
+}
+
+function ThumbDown({ className = "", ...props }: ThumbDownProps) {
   return (
-    <button className={`bg-[#f9ad1d] p-2 outline-none ${className}`}>
+    <button className={`bg-[#f9ad1d] p-2 outline-none ${className}`} {...props}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         className="mx-auto"

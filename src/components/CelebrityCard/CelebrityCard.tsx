@@ -1,16 +1,21 @@
+import { useState } from "react";
 import formatDistanceStrict from "date-fns/formatDistanceStrict";
 import ThumbDown from "@components/ThumbDown";
 import ThumbUp from "@components/ThumbUp";
 import { Celebrity } from "../../types";
+import useVote from "@hooks/useVote";
 
-interface CardProps {
+interface CelebrityCardProps {
   celebrity: Celebrity;
 }
 
+type Vote = "positive" | "negative";
+
 const NOW = new Date();
 
-function Card({ celebrity }: CardProps) {
+function CelebrityCard({ celebrity }: CelebrityCardProps) {
   const {
+    _id,
     name,
     category,
     description,
@@ -19,9 +24,22 @@ function Card({ celebrity }: CardProps) {
     picture,
   } = celebrity;
 
+  const [vote, setVote] = useState<Vote | null>();
+  const { addVote } = useVote();
+
   const totalVotes = positive + negative;
-  const upVotes = Math.round(((100 * positive) / totalVotes) * 10) / 10;
-  const downVotes = Math.round(((100 * negative) / totalVotes) * 10) / 10;
+  const positiveVotes = Math.round(((100 * positive) / totalVotes) * 10) / 10;
+  const negativeVotes = Math.round(((100 * negative) / totalVotes) * 10) / 10;
+
+  const handleVote = () => {
+    if (!vote) {
+      // TODO: Add visual notification
+      console.error("Please select a type of vote first");
+      return;
+    }
+    addVote({ celebrityId: _id, vote });
+    setVote(null);
+  };
 
   return (
     <div
@@ -50,9 +68,12 @@ function Card({ celebrity }: CardProps) {
               <span className="capitalize">{category}</span>
             </p>
             <div className="flex items-center justify-end mt-2 space-x-2 ">
-              <ThumbUp />
-              <ThumbDown />
-              <button className="px-4 py-2 bg-black border border-white outline-none bg-opacity-60">
+              <ThumbUp onClick={() => setVote("positive")} />
+              <ThumbDown onClick={() => setVote("negative")} />
+              <button
+                onClick={handleVote}
+                className="px-4 py-2 bg-black border border-white outline-none bg-opacity-60"
+                disabled={!vote}>
                 Vote now
               </button>
             </div>
@@ -63,20 +84,20 @@ function Card({ celebrity }: CardProps) {
         <div
           className="bg-[#3cbbb4] opacity-80"
           style={{
-            width: `${upVotes}%`,
+            width: `${positiveVotes}%`,
           }}></div>
         <div
           className="bg-[#f9ad1d] opacity-80"
           style={{
-            width: `${downVotes}%`,
+            width: `${negativeVotes}%`,
           }}></div>
         <div className="absolute flex justify-between w-full h-full">
           <div>
             <ThumbUp />
-            <span className="text-lg">{upVotes}%</span>
+            <span className="text-lg">{positiveVotes}%</span>
           </div>
           <div>
-            <span className="text-lg">{downVotes}%</span>
+            <span className="text-lg">{negativeVotes}%</span>
             <ThumbDown />
           </div>
         </div>
@@ -85,4 +106,4 @@ function Card({ celebrity }: CardProps) {
   );
 }
 
-export default Card;
+export default CelebrityCard;
