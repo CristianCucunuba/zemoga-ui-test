@@ -6,7 +6,9 @@ interface ThumbDownProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 
 function ThumbDown({ className = "", ...props }: ThumbDownProps) {
   return (
-    <button className={`bg-[#f9ad1d] p-2 outline-none ${className}`} {...props}>
+    <button
+      className={`bg-[#f9ad1d] p-2 ${className} focus:outline-none`}
+      {...props}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         className="mx-auto"

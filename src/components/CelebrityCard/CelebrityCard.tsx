@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { Fragment, useState } from "react";
 import formatDistanceStrict from "date-fns/formatDistanceStrict";
 import ThumbDown from "@components/ThumbDown";
 import ThumbUp from "@components/ThumbUp";
@@ -25,6 +25,7 @@ function CelebrityCard({ celebrity }: CelebrityCardProps) {
   } = celebrity;
 
   const [vote, setVote] = useState<Vote | null>();
+  const [hasVoted, setHasVoted] = useState(false);
   const { addVote } = useVote();
 
   const totalVotes = positive + negative;
@@ -32,12 +33,13 @@ function CelebrityCard({ celebrity }: CelebrityCardProps) {
   const negativeVotes = Math.round(((100 * negative) / totalVotes) * 10) / 10;
 
   const handleVote = () => {
-    if (!vote) {
-      // TODO: Add visual notification
-      console.error("Please select a type of vote first");
+    if (hasVoted) {
+      setHasVoted(false);
       return;
     }
+    if (!vote) return;
     addVote.mutate({ celebrityId: _id, vote });
+    setHasVoted(true);
     setVote(null);
   };
 
@@ -64,17 +66,37 @@ function CelebrityCard({ celebrity }: CelebrityCardProps) {
           <div className="pl-1 ml-8">
             <p className="mb-2 text-sm line-clamp-2">{description}</p>
             <p className="text-xs font-medium text-right">
-              {formatDistanceStrict(new Date(lastUpdated), NOW)} ago in{" "}
-              <span className="capitalize">{category}</span>
+              {hasVoted ? (
+                "Thank you for your vote"
+              ) : (
+                <Fragment>
+                  {formatDistanceStrict(new Date(lastUpdated), NOW)} ago in{" "}
+                  <span className="capitalize">{category}</span>
+                </Fragment>
+              )}
             </p>
             <div className="flex items-center justify-end mt-2 space-x-2 ">
-              <ThumbUp onClick={() => setVote("positive")} />
-              <ThumbDown onClick={() => setVote("negative")} />
+              {!hasVoted && (
+                <Fragment>
+                  <ThumbUp
+                    className={`${
+                      vote === "positive" ? "border-2" : "border-0"
+                    }  border-white`}
+                    onClick={() => setVote("positive")}
+                  />
+                  <ThumbDown
+                    className={`${
+                      vote === "negative" ? "border-2" : "border-0"
+                    }  border-white`}
+                    onClick={() => setVote("negative")}
+                  />
+                </Fragment>
+              )}
               <button
                 onClick={handleVote}
-                className="px-4 py-2 bg-black border border-white outline-none bg-opacity-60"
-                disabled={!vote}>
-                Vote now
+                className="px-4 py-2 bg-black border border-white bg-opacity-60 focus:outline-none"
+                disabled={!vote && !hasVoted}>
+                {hasVoted ? "Vote Again" : "Vote Now"}
               </button>
             </div>
           </div>
