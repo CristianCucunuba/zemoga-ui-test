@@ -1,9 +1,9 @@
 import { Fragment, useState } from "react";
 import formatDistanceStrict from "date-fns/formatDistanceStrict";
+import useVote from "@hooks/useVote";
 import ThumbDown from "@components/ThumbDown";
 import ThumbUp from "@components/ThumbUp";
 import { Celebrity } from "../../types";
-import useVote from "@hooks/useVote";
 
 interface CelebrityCardProps {
   celebrity: Celebrity;
@@ -45,7 +45,7 @@ function CelebrityCard({ celebrity }: CelebrityCardProps) {
 
   return (
     <div
-      className="min-w-[19rem] bg-no-repeat bg-cover h-[18.5rem] text-white relative mr-4 flex items-center"
+      className="min-w-[19rem] bg-no-repeat bg-cover h-[18.5rem] text-white relative mr-3 flex items-center md:mr-0 md:h-[351px]"
       style={{
         backgroundImage: `linear-gradient(0deg, rgba(0,0,0,0.50) 10%, rgba(0,0,0,0) 80%),url(${picture})`,
       }}>
