@@ -4,6 +4,7 @@ import { useQuery } from "react-query";
 import ThumbDown from "@components/ThumbDown";
 import ThumbUp from "@components/ThumbUp";
 import CelebrityCard from "@components/CelebrityCard";
+import Navbar from "@components/Navbar";
 import { Celebrity } from "../types";
 import { findCelebrities } from "src/api";
 
@@ -31,8 +32,7 @@ export default function Home({ celebrities }: HomeProps) {
             "linear-gradient(180deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0) 20%),url('img/pope-francis.png')",
         }}>
         <div className="px-4 pt-7">
-          <img src="img/hamburger.svg" className="absolute top-5 right-5 w-7" />
-          <h1 className="text-2xl text-white">Rule of thumb.</h1>
+          <Navbar />
           <div className="w-56 mt-1 text-white bg-black bg-opacity-40 backdrop-filter backdrop-blur-md">
             <div className="p-3">
               <span className="text-sm font-light">What's your opinion on</span>

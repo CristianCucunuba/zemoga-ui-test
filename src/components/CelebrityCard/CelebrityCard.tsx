@@ -67,7 +67,7 @@ function CelebrityCard({ celebrity }: CelebrityCardProps) {
             <p className="mb-2 text-sm line-clamp-2">{description}</p>
             <p className="text-xs font-medium text-right">
               {hasVoted ? (
-                "Thank you for your vote"
+                "Thank you for your vote!"
               ) : (
                 <Fragment>
                   {formatDistanceStrict(new Date(lastUpdated), NOW)} ago in{" "}
