@@ -12,7 +12,7 @@ function ThumbDown({ className = "", ...props }: ThumbDownProps) {
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 36 36"
-        className="w-4 h-4 mx-auto md:w-5 md:h-5"
+        className="w-4 h-4 mx-auto"
         fill="none">
         <path
           fill="#fff"

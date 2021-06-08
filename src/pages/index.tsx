@@ -96,7 +96,7 @@ export default function Home({ celebrities }: HomeProps) {
       </div>
       <div className="px-4">
         {/* Banner */}
-        <div className="p-3 grid grid-cols-[45%,55%] items-center mt-6 bg-[#ebebeb] text-light-gray md:grid-cols-[15%,85%] md:py-6">
+        <div className="p-3 grid grid-cols-[45%,55%] items-center mt-6 bg-[#ebebeb] text-light-gray md:grid-cols-[15%,85%] md:py-6 md:gap-4">
           <div className="md:text-center">
             <p className="text-sm font-light">Speak out. Be heard.</p>
             <p className="text-2xl font-bold md:text-lg">Be counted</p>
@@ -108,14 +108,16 @@ export default function Home({ celebrities }: HomeProps) {
           </div>
         </div>
         {/* Polls section */}
-        <div className="flex items-center justify-between mt-6 mb-4">
+        <div className="flex items-center justify-between mt-6 mb-4 md:mb-8">
           <h3 className="text-2xl font-light">Previous Rulings</h3>
           {isTablet && (
-            <div className="z-10 w-36">
+            <div className="z-10 w-36 h-7">
               <Listbox value={listView} onChange={setListView}>
                 <div className="relative">
-                  <Listbox.Button className="w-full p-2 border-2 border-black focus:outline-none">
-                    <span className="text-center capitalize">{listView}</span>
+                  <Listbox.Button className="w-full py-1 border-2 border-black focus:outline-none">
+                    <span className="text-sm text-center capitalize">
+                      {listView}
+                    </span>
                     <span className="absolute inset-y-0 right-0 flex items-center pr-4 pointer-events-none">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -139,7 +141,7 @@ export default function Home({ celebrities }: HomeProps) {
                       {dropdownOptions.map((option) => (
                         <Listbox.Option
                           key={option}
-                          className="relative py-2 text-center capitalize border-2 border-t-0 border-black focus:outline-none"
+                          className="relative py-2 text-sm text-center capitalize border-2 border-t-0 border-black focus:outline-none"
                           value={option}>
                           {option}
                         </Listbox.Option>

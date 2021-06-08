@@ -49,38 +49,70 @@ function CelebrityCard({ celebrity, listView }: CelebrityCardProps) {
 
   return (
     <div
-      className={`flex items-center relative flex-shrink-0 w-[300px] h-[300px] bg-gray-100 mr-3 text-white ${
-        isListView ? "md:h-36 items-start" : "md:h-[351px]"
+      className={`flex items-center relative flex-shrink-0 w-[300px] h-[300px] bg-gray-100 mr-3 text-white md:w-full ${
+        isListView ? "md:h-36 items-start" : "h-[351px]"
       }`}>
-      <Image
-        src={picture}
-        alt={`${name} picture`}
-        layout="fill"
-        objectFit="cover"
-      />
+      {isListView ? (
+        <div className="absolute w-40 h-full">
+          <Image
+            src={picture}
+            alt={`${name} picture`}
+            layout="fill"
+            objectFit="cover"
+          />
+        </div>
+      ) : (
+        <Image
+          src={picture}
+          alt={`${name} picture`}
+          layout="fill"
+          objectFit="cover"
+        />
+      )}
       <div
         className="absolute z-0 w-full h-full"
         style={{
-          background: `linear-gradient(0deg,rgba(0,0,0,0.5) 10%, rgba(0,0,0,0) 80%)`,
+          background: !isListView
+            ? `linear-gradient(0deg,rgba(0,0,0,0.5) 10%, rgba(0,0,0,0) 80%)`
+            : `linear-gradient(90deg, rgba(0, 0, 0, 0.0001) 0%, #888888 19.79%, #666666 50%, rgba(51, 51, 51, 0.6) 71.88%)`,
         }}></div>
       <div className="relative z-1">
-        <div className={`mr-8 ${isListView ? "md:flex md:mr-4 md:ml-32" : ""}`}>
-          <div className="absolute top-1/4 md:top-0">
+        <div
+          className={`mr-8 ${
+            isListView
+              ? "md:flex md:mr-4 md:ml-32 md:justify-between"
+              : "md:pt-11"
+          }`}>
+          <div
+            className={`absolute top-1/4 ${
+              isListView ? "md:top-0 left-0" : "md:top-[87px]"
+            }`}>
             {positive >= negative ? (
               <ThumbUp className="self-end" />
             ) : (
               <ThumbDown className="self-end" />
             )}
           </div>
-          <div className="pl-1 ml-8">
+          <div className="pl-1 ml-8 md:pl-3">
             <div className={`flex h-20 ${isListView && "md:h-auto"}`}>
-              <h4 className="self-end text-3xl leading-9 line-clamp-2">
+              <h4
+                className={`self-end text-3xl leading-9 line-clamp-2 ${
+                  isListView && "md:line-clamp-1"
+                }`}>
                 {name}
               </h4>
             </div>
-            <p className="mb-2 text-sm line-clamp-2">{description}</p>
+            <p
+              className={`mb-2 text-sm line-clamp-2 ${
+                isListView ? "md:mr-6 md:mt-4" : "md:mt-1"
+              }`}>
+              {description}
+            </p>
           </div>
-          <div className="flex flex-col">
+          <div
+            className={`flex flex-col flex-shrink-0 ${
+              isListView && "md:justify-center"
+            }`}>
             <p className="text-xs font-medium text-right">
               {hasVoted ? (
                 "Thank you for your vote!"

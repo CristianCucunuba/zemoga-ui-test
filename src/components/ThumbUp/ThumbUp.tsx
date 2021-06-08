@@ -11,7 +11,7 @@ function ThumbUp({ className = "", ...props }: ThumbDownProps) {
       {...props}>
       <svg
         viewBox="0 0 36 36"
-        className="w-4 h-4 mx-auto md:w-5 md:h-5"
+        className="w-4 h-4 mx-auto"
         xmlns="http://www.w3.org/2000/svg"
         fill="none">
         <path
