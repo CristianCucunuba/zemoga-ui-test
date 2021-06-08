@@ -14,6 +14,7 @@ function ThumbDown({
     <button
       className={`bg-[#f9ad1d] p-2 ${className} focus:outline-none`}
       type="button"
+      aria-label="downvote"
       {...props}>
       <svg
         xmlns="http://www.w3.org/2000/svg"

@@ -14,6 +14,7 @@ function ThumbUp({
     <button
       className={`bg-[#3cbbb4] p-2 ${className} focus:outline-none`}
       type="button"
+      aria-label="upvote"
       {...props}>
       <svg
         viewBox="0 0 36 36"
