@@ -2,16 +2,21 @@ import { ButtonHTMLAttributes } from "react";
 
 interface ThumbDownProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   className?: string;
+  size?: string;
 }
 
-function ThumbUp({ className = "", ...props }: ThumbDownProps) {
+function ThumbUp({
+  className = "",
+  size = "w-4 h-4",
+  ...props
+}: ThumbDownProps) {
   return (
     <button
       className={`bg-[#3cbbb4] p-2 ${className} focus:outline-none`}
       {...props}>
       <svg
         viewBox="0 0 36 36"
-        className="w-4 h-4 mx-auto"
+        className={`${size} mx-auto`}
         xmlns="http://www.w3.org/2000/svg"
         fill="none">
         <path

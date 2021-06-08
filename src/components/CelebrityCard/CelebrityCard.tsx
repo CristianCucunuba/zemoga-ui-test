@@ -50,7 +50,7 @@ function CelebrityCard({ celebrity, listView }: CelebrityCardProps) {
   return (
     <div
       className={`flex items-center relative flex-shrink-0 w-[300px] h-[300px] bg-gray-100 mr-3 text-white md:w-full ${
-        isListView ? "md:h-36 items-start" : "h-[351px]"
+        isListView ? "md:h-36 items-start lg:h-[170px]" : "md:h-[351px]"
       }`}>
       {isListView ? (
         <div className="absolute w-40 h-full">
@@ -78,7 +78,7 @@ function CelebrityCard({ celebrity, listView }: CelebrityCardProps) {
         }}></div>
       <div className="relative z-1">
         <div
-          className={`mr-8 ${
+          className={`mr-8 lg:mr-4 ${
             isListView
               ? "md:flex md:mr-4 md:ml-32 md:justify-between"
               : "md:pt-11"
@@ -96,7 +96,7 @@ function CelebrityCard({ celebrity, listView }: CelebrityCardProps) {
           <div className="pl-1 ml-8 md:pl-3">
             <div className={`flex h-20 ${isListView && "md:h-auto"}`}>
               <h4
-                className={`self-end text-3xl leading-9 line-clamp-2 ${
+                className={`self-end text-3xl leading-9 line-clamp-2 lg:text-4xl ${
                   isListView && "md:line-clamp-1"
                 }`}>
                 {name}
@@ -164,10 +164,14 @@ function CelebrityCard({ celebrity, listView }: CelebrityCardProps) {
         <div className="absolute flex justify-between w-full h-full">
           <div>
             <ThumbUp className="h-full bg-opacity-0" />
-            <span className="text-lg">{positiveVotes}%</span>
+            <span className={`${isListView ? "md:text-2xl" : "text-lg"}`}>
+              {positiveVotes}%
+            </span>
           </div>
           <div>
-            <span className="text-lg">{negativeVotes}%</span>
+            <span className={`${isListView ? "md:text-2xl" : "text-lg"}`}>
+              {negativeVotes}%
+            </span>
             <ThumbDown className="h-full bg-opacity-0" />
           </div>
         </div>
