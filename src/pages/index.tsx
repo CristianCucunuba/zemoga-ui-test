@@ -152,11 +152,18 @@ export default function Home({ celebrities }: HomeProps) {
             <span className="md:text-lg">Follow us</span>
             <div className="flex md:ml-3">
               <img
+                width="24"
+                height="24"
                 src="img/facebook.svg"
                 alt="facebook logo"
                 className="mr-4"
               />
-              <img src="img/twitter.svg" alt="twitter logo" />
+              <img
+                src="img/twitter.svg"
+                alt="twitter logo"
+                width="26"
+                height="23"
+              />
             </div>
           </div>
         </footer>

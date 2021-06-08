@@ -12,19 +12,30 @@ function Navbar() {
     <div className="flex flex-col lg:justify-between lg:flex-row-reverse lg:items-baseline">
       {isDesktop ? (
         <nav>
-          <ul className="flex items-center space-x-5 text-lg font-light text-white cursor-pointer">
+          <ul className="flex space-x-5 text-lg font-light text-white cursor-pointer">
             <li>Past Trials</li>
             <li>How It Works</li>
             <li>Login / Sign Up</li>
             <li>
-              <img src="img/search.svg" alt="" />
+              <button type="button" aria-label="search">
+                <img src="img/search.svg" alt="search icon" />
+              </button>
             </li>
           </ul>
         </nav>
       ) : (
         <Fragment>
-          <button className="z-10 self-end" onClick={toggleNavbar}>
-            <img src="img/hamburger.svg" className="w-6" />
+          <button
+            className="z-10 self-end"
+            onClick={toggleNavbar}
+            type="button"
+            aria-label="Menu">
+            <img
+              src="img/hamburger.svg"
+              alt="Menu icon"
+              width="24"
+              height="24"
+            />
           </button>
           <div
             className={`shadow-md bg-gray-50 bottom-0 duration-500 transition-all fixed top-0 z-50 ${

@@ -13,6 +13,7 @@ function ThumbDown({
   return (
     <button
       className={`bg-[#f9ad1d] p-2 ${className} focus:outline-none`}
+      type="button"
       {...props}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
