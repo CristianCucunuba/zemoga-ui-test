@@ -15,6 +15,11 @@ type Vote = "positive" | "negative";
 
 const NOW = new Date();
 
+const calculatePercentage = (value: number, totalAmount: number) => {
+  if (!totalAmount) return 0;
+  return Math.round(((100 * value) / totalAmount) * 10) / 10;
+};
+
 function CelebrityCard({ celebrity, listView }: CelebrityCardProps) {
   const {
     _id,
@@ -31,8 +36,8 @@ function CelebrityCard({ celebrity, listView }: CelebrityCardProps) {
   const { addVote } = useVote();
 
   const totalVotes = positive + negative;
-  const positiveVotes = Math.round(((100 * positive) / totalVotes) * 10) / 10;
-  const negativeVotes = Math.round(((100 * negative) / totalVotes) * 10) / 10;
+  const positiveVotes = calculatePercentage(positive, totalVotes);
+  const negativeVotes = calculatePercentage(negative, totalVotes);
 
   const handleVote = () => {
     if (hasVoted) {
