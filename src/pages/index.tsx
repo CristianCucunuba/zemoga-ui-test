@@ -1,4 +1,5 @@
 import axios from "axios";
+import Head from "next/head";
 import Image from "next/image";
 import { GetServerSideProps } from "next";
 import { useQuery } from "react-query";
@@ -29,7 +30,15 @@ export default function Home({ celebrities }: HomeProps) {
 
   return (
     <div>
-      {/* Hero */}
+      <Head>
+        <title>Rule of Thumb</title>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+        <meta
+          name="description"
+          content="Rule of Thumb is a crowd sourced court of public opinion where
+          anyone and everyone can speak out and speak freely. It's easy: You
+          share your opinion, we analyze and put the data in a public report."></meta>
+      </Head>
       <div className="relative">
         <Image
           src="/img/pope-francis.png"
