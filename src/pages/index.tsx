@@ -37,7 +37,7 @@ export default function Home({ celebrities }: HomeProps) {
       {/* Hero */}
       <div className="relative">
         <Image
-          src="/img/pope-francis-2x.png"
+          src="/img/pope-francis.png"
           alt="Pope francis picture"
           layout="fill"
           objectFit="cover"
