@@ -49,7 +49,7 @@ Run the project
 ## Result 
 ![image](https://user-images.githubusercontent.com/8785633/121229906-2a743900-c854-11eb-91c5-cec4993291ce.png)
 
-### Lighhouse Score 🥳
+### LightHouse Score 🥳
 ![image](https://user-images.githubusercontent.com/8785633/121229810-10d2f180-c854-11eb-8e88-97b9efd36323.png)
 
 
