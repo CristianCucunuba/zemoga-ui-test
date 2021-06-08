@@ -6,13 +6,13 @@ function Navbar() {
   const isDesktop = useMediaQuery("(min-width: 1024px)");
 
   const toggleNavbar = () => setIsNavbarOpen((isNavbarOpen) => !isNavbarOpen);
-  const linkStyles = "text-lg font-bold text-gray-800";
+  const linkStyles = "text-lg font-bold text-gray-800 cursor-pointer";
 
   return (
     <div className="flex flex-col lg:justify-between lg:flex-row-reverse lg:items-baseline">
       {isDesktop ? (
         <nav>
-          <ul className="flex items-center space-x-5 text-lg font-light text-white">
+          <ul className="flex items-center space-x-5 text-lg font-light text-white cursor-pointer">
             <li>Past Trials</li>
             <li>How It Works</li>
             <li>Login / Sign Up</li>
@@ -53,7 +53,7 @@ function Navbar() {
           </div>
         </Fragment>
       )}
-      <h1 className="-mt-4 text-2xl text-white lg:mt-0 lg:text-4xl">
+      <h1 className="-mt-4 text-2xl text-white cursor-pointer lg:mt-0 lg:text-4xl">
         Rule of thumb.
       </h1>
     </div>
