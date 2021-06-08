@@ -1,4 +1,5 @@
 import { Fragment, useState } from "react";
+import Image from "next/image";
 import formatDistanceStrict from "date-fns/formatDistanceStrict";
 import useVote from "@hooks/useVote";
 import ThumbDown from "@components/ThumbDown";
@@ -7,13 +8,14 @@ import { Celebrity } from "../../types";
 
 interface CelebrityCardProps {
   celebrity: Celebrity;
+  listView: "grid" | "list";
 }
 
 type Vote = "positive" | "negative";
 
 const NOW = new Date();
 
-function CelebrityCard({ celebrity }: CelebrityCardProps) {
+function CelebrityCard({ celebrity, listView }: CelebrityCardProps) {
   const {
     _id,
     name,
@@ -43,28 +45,42 @@ function CelebrityCard({ celebrity }: CelebrityCardProps) {
     setVote(null);
   };
 
+  const isListView = listView === "list";
+
   return (
     <div
-      className="min-w-[19rem] bg-no-repeat bg-cover h-[18.5rem] text-white relative mr-3 flex items-center md:mr-0 md:h-[351px]"
-      style={{
-        backgroundImage: `linear-gradient(0deg, rgba(0,0,0,0.50) 10%, rgba(0,0,0,0) 80%),url(${picture})`,
-      }}>
-      <div>
-        <div className="mr-8">
-          <div className="flex mb-2">
+      className={`flex items-center relative flex-shrink-0 w-[300px] h-[300px] bg-gray-100 mr-3 text-white ${
+        isListView ? "md:h-36 items-start" : "md:h-[351px]"
+      }`}>
+      <Image
+        src={picture}
+        alt={`${name} picture`}
+        layout="fill"
+        objectFit="cover"
+      />
+      <div
+        className="absolute z-0 w-full h-full"
+        style={{
+          background: `linear-gradient(0deg,rgba(0,0,0,0.5) 10%, rgba(0,0,0,0) 80%)`,
+        }}></div>
+      <div className="relative z-1">
+        <div className={`mr-8 ${isListView ? "md:flex md:mr-4 md:ml-32" : ""}`}>
+          <div className="absolute top-1/4 md:top-0">
             {positive >= negative ? (
               <ThumbUp className="self-end" />
             ) : (
               <ThumbDown className="self-end" />
             )}
-            <div className="flex h-20 pl-1">
+          </div>
+          <div className="pl-1 ml-8">
+            <div className={`flex h-20 ${isListView && "md:h-auto"}`}>
               <h4 className="self-end text-3xl leading-9 line-clamp-2">
                 {name}
               </h4>
             </div>
-          </div>
-          <div className="pl-1 ml-8">
             <p className="mb-2 text-sm line-clamp-2">{description}</p>
+          </div>
+          <div className="flex flex-col">
             <p className="text-xs font-medium text-right">
               {hasVoted ? (
                 "Thank you for your vote!"
@@ -75,7 +91,7 @@ function CelebrityCard({ celebrity }: CelebrityCardProps) {
                 </Fragment>
               )}
             </p>
-            <div className="flex items-center justify-end mt-2 space-x-2 ">
+            <div className="flex items-center justify-end mt-2 space-x-2">
               {!hasVoted && (
                 <Fragment>
                   <ThumbUp

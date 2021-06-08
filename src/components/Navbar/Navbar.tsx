@@ -15,7 +15,9 @@ function Navbar() {
         className={`shadow-md bg-gray-50 bottom-0 duration-500 transition-all fixed top-0 z-50 ${
           isNavbarOpen ? "right-0" : "-right-56"
         }`}>
-        <div className="flex justify-end mt-4 mr-4" onClick={toggleNavbar}>
+        <div
+          className="flex justify-end mt-4 mr-4 cursor-pointer"
+          onClick={toggleNavbar}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="w-8 h-8"

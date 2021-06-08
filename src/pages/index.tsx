@@ -1,6 +1,9 @@
+import { Fragment, useState } from "react";
 import axios from "axios";
+import Image from "next/image";
 import { GetServerSideProps } from "next";
 import { useQuery } from "react-query";
+import { Listbox, Transition } from "@headlessui/react";
 import ThumbDown from "@components/ThumbDown";
 import ThumbUp from "@components/ThumbUp";
 import CelebrityCard from "@components/CelebrityCard";
@@ -13,7 +16,10 @@ interface HomeProps {
   celebrities: Celebrity[];
 }
 
+const dropdownOptions = ["grid", "list"] as const;
+
 export default function Home({ celebrities }: HomeProps) {
+  const [listView, setListView] = useState(dropdownOptions[0]);
   const isTablet = useMediaQuery("(min-width: 768px)");
   const { data } = useQuery<Celebrity[]>(
     "celebrities",
@@ -27,92 +33,156 @@ export default function Home({ celebrities }: HomeProps) {
   return (
     <div>
       {/* Hero */}
-      <div
-        className="relative bg-center bg-no-repeat bg-cover"
-        style={{
-          backgroundImage:
-            "linear-gradient(180deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0) 20%),url('img/pope-francis.png')",
-        }}>
-        <div className="px-4 pt-7">
-          <Navbar />
-          <div className="w-[214px] md:w-[368px] mt-1 text-white bg-black bg-opacity-40 backdrop-filter backdrop-blur-md">
-            <div className="p-3">
-              <span className="text-sm font-light">What's your opinion on</span>
-              <h2 className="mb-1 text-4xl leading-9 md:text-[28px] md:mb-5">
-                Pope Francis?
-              </h2>
-              <p className="font-light leading-4 md:leading-4 md:text-lg">
-                He's talking tough on clergy sexual abuse, or is he just another
-                pervert protector? (thumbs down) or a true pedophile punishing
-                pontiff? (thumbs up)
-              </p>
-              {isTablet && (
-                <div className="flex items-center mt-4">
-                  <img
-                    className=""
-                    src="/img/wikipedia.svg"
-                    alt="wikipedia logo"
-                  />
-                  <span className="ml-2 text-sm font-light underline">
-                    More information
-                  </span>
-                </div>
-              )}
-              <span className="inline-block mt-4 text-xs font-bold md:text-xl">
-                What's Your Veredict?
-              </span>
-            </div>
-            <div className="grid grid-cols-2 md:mt-10">
-              <ThumbUp />
-              <ThumbDown />
+      <div className="relative">
+        <Image
+          src="/img/pope-francis-2x.png"
+          alt="Pope francis picture"
+          layout="fill"
+          objectFit="cover"
+        />
+        <div
+          className="relative z-1"
+          style={{
+            background:
+              "linear-gradient(180deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0) 30%)",
+          }}>
+          <div className="px-4 pt-7">
+            <Navbar />
+            <div className="w-[214px] md:w-[368px] mt-1 text-white bg-black bg-opacity-40 backdrop-filter backdrop-blur-md">
+              <div className="p-3">
+                <span className="text-sm font-light">
+                  What's your opinion on
+                </span>
+                <h2 className="mb-1 text-4xl leading-9 md:text-[28px] md:mb-5">
+                  Pope Francis?
+                </h2>
+                <p className="font-light leading-4 md:leading-4 md:text-lg">
+                  He's talking tough on clergy sexual abuse, or is he just
+                  another pervert protector? (thumbs down) or a true pedophile
+                  punishing pontiff? (thumbs up)
+                </p>
+                {isTablet && (
+                  <div className="flex items-center mt-4">
+                    <img
+                      className=""
+                      src="/img/wikipedia.svg"
+                      alt="wikipedia logo"
+                    />
+                    <span className="ml-2 text-sm font-light underline">
+                      More information
+                    </span>
+                  </div>
+                )}
+                <span className="inline-block mt-4 text-xs font-bold md:text-xl">
+                  What's Your Veredict?
+                </span>
+              </div>
+              <div className="grid grid-cols-2 md:mt-10">
+                <ThumbUp />
+                <ThumbDown />
+              </div>
             </div>
           </div>
-        </div>
-        <div className="flex items-stretch mt-6 md:mt-7">
-          <div className="flex items-center pl-40 pr-2 text-sm font-light text-white uppercase bg-black md:h-10 md:text-md bg-opacity-40">
-            closing in
-          </div>
-          <div className="triangle"></div>
-          <div className="flex-grow py-1 -ml-2 text-lg font-light text-gray-700 bg-white bg-opacity-40">
-            <span className="ml-4 font-medium text-gray-900">22</span>days
+          <div className="flex items-stretch mt-6 md:mt-7">
+            <div className="flex items-center pl-8 pr-2 text-sm font-light text-white uppercase bg-black md:pl-40 md:h-10 md:text-md bg-opacity-40">
+              closing in
+            </div>
+            <div className="triangle"></div>
+            <div className="flex-grow py-1 -ml-2 text-lg font-light text-gray-700 bg-white bg-opacity-40">
+              <span className="ml-4 font-medium text-gray-900">22</span>days
+            </div>
           </div>
         </div>
       </div>
       <div className="px-4">
         {/* Banner */}
-        <div className="grid grid-cols-[45%,55%] items-center p-3 mt-6 bg-[#ebebeb] text-light-gray md:grid-cols-[18%,85%] md:py-6 md:px-3">
-          <div className="md:mr-2 md:text-center">
+        <div className="p-3 grid grid-cols-[45%,55%] items-center mt-6 bg-[#ebebeb] text-light-gray md:grid-cols-[15%,85%] md:py-6">
+          <div className="md:text-center">
             <p className="text-sm font-light">Speak out. Be heard.</p>
             <p className="text-2xl font-bold md:text-lg">Be counted</p>
           </div>
-          <div className="text-sm font-light leading-4 md:ml-2 md:text-lg md:leading-5">
+          <div className="text-sm font-light leading-4 md:text-lg md:leading-5">
             Rule of Thumb is a crowd sourced court of public opinion where
             anyone and everyone can speak out and speak freely. It's easy: You
             share your opinion, we analyze and put the data in a public report.
           </div>
         </div>
         {/* Polls section */}
-        <div className="flex items-center justify-between">
-          <h3 className="mt-6 mb-4 text-2xl font-light">Previous Rulings</h3>
+        <div className="flex items-center justify-between mt-6 mb-4">
+          <h3 className="text-2xl font-light">Previous Rulings</h3>
+          {isTablet && (
+            <div className="z-10 w-36">
+              <Listbox value={listView} onChange={setListView}>
+                <div className="relative">
+                  <Listbox.Button className="w-full p-2 border-2 border-black focus:outline-none">
+                    <span className="text-center capitalize">{listView}</span>
+                    <span className="absolute inset-y-0 right-0 flex items-center pr-4 pointer-events-none">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="11"
+                        height="7"
+                        fill="none">
+                        <path
+                          fill="#333"
+                          fillRule="evenodd"
+                          d="M5.25 7L0 0h10.5L5.25 7z"
+                          clipRule="evenodd"></path>
+                      </svg>
+                    </span>
+                  </Listbox.Button>
+                  <Transition
+                    as={Fragment}
+                    leave="transition ease-in duration-100"
+                    leaveFrom="opacity-100"
+                    leaveTo="opacity-0">
+                    <Listbox.Options className="absolute w-full bg-white focus:outline-none">
+                      {dropdownOptions.map((option) => (
+                        <Listbox.Option
+                          key={option}
+                          className="relative py-2 text-center capitalize border-2 border-t-0 border-black focus:outline-none"
+                          value={option}>
+                          {option}
+                        </Listbox.Option>
+                      ))}
+                    </Listbox.Options>
+                  </Transition>
+                </div>
+              </Listbox>
+            </div>
+          )}
         </div>
-        <div className="flex overflow-x-scroll md:grid md:grid-cols-2 md:gap-5">
+
+        <div
+          className={`flex flex-nowrap overflow-x-auto md:gap-5 ${
+            listView === "grid"
+              ? "md:grid md:grid-cols-2"
+              : "md:grid md:grid-cols-1"
+          }`}>
           {data?.map((celebrity) => (
-            <CelebrityCard celebrity={celebrity} key={celebrity._id} />
+            <CelebrityCard
+              key={celebrity._id}
+              celebrity={celebrity}
+              listView={listView}
+            />
           ))}
         </div>
         {/* CTA */}
-        <div
-          className="relative mt-6 text-center bg-cover"
-          style={{
-            backgroundImage: "url('img/bg-people.png')",
-          }}>
-          <div className="px-8 py-4 bg-white bg-opacity-75 md:items-center md:flex md:h-28">
-            <p className="text-2xl text-light-gray md:mr-4 md:text-xl">
-              Is there anyone else you would want us to add?
-            </p>
-            <button className="w-full py-2 text-lg border-2 border-gray-700 md:py-3 md:flex-1 text-light-gray md:text-xl">
-              Submit a name
-            </button>
+        <div className="relative mt-6 text-center bg-cover">
+          <Image
+            src="/img/bg-people.png"
+            alt="Picture of crowded place"
+            layout="fill"
+            objectFit="cover"
+          />
+          <div className="relative z-10">
+            <div className="px-8 py-4 bg-white bg-opacity-75 md:items-center md:flex md:h-28">
+              <p className="mb-3 text-2xl leading-6 text-light-gray md:mr-4 md:text-xl">
+                Is there anyone else you would want us to add?
+              </p>
+              <button className="w-full py-2 text-lg border-2 border-gray-700 md:py-3 md:flex-1 text-light-gray md:text-xl">
+                Submit a name
+              </button>
+            </div>
           </div>
         </div>
         <div className="mt-6 mb-4 border-b-2 border-gray-700 border-dashed"></div>
