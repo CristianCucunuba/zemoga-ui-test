@@ -8,7 +8,7 @@ import { Celebrity } from "../../types";
 
 interface CelebrityCardProps {
   celebrity: Celebrity;
-  listView: "grid" | "list";
+  listView: string;
 }
 
 type Vote = "positive" | "negative";

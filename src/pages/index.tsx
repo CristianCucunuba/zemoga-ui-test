@@ -1,25 +1,20 @@
-import { Fragment, useState } from "react";
 import axios from "axios";
 import Image from "next/image";
 import { GetServerSideProps } from "next";
 import { useQuery } from "react-query";
-import { Listbox, Transition } from "@headlessui/react";
 import ThumbDown from "@components/ThumbDown";
 import ThumbUp from "@components/ThumbUp";
-import CelebrityCard from "@components/CelebrityCard";
 import Navbar from "@components/Navbar";
 import { Celebrity } from "../types";
 import { findCelebrities } from "src/api";
 import { useMediaQuery } from "@hooks/useMediaQuery";
+import GridCelebrities from "@components/GridCelebrities";
 
 interface HomeProps {
   celebrities: Celebrity[];
 }
 
-const dropdownOptions = ["grid", "list"] as const;
-
 export default function Home({ celebrities }: HomeProps) {
-  const [listView, setListView] = useState(dropdownOptions[0]);
   const isTablet = useMediaQuery("(min-width: 768px)");
   const isDesktop = useMediaQuery("(min-width: 1024px)");
 
@@ -126,67 +121,7 @@ export default function Home({ celebrities }: HomeProps) {
             />
           )}
         </div>
-        {/* Polls section */}
-        <div className="flex items-center justify-between mt-6 mb-4 md:mb-8 lg:mt-9">
-          <h3 className="text-2xl font-light lg:text-5xl">Previous Rulings</h3>
-          {isTablet && (
-            <div className="z-10 w-36 h-7">
-              <Listbox value={listView} onChange={setListView}>
-                <div className="relative">
-                  <Listbox.Button className="w-full py-1 border-2 border-black focus:outline-none">
-                    <span className="text-sm text-center capitalize">
-                      {listView}
-                    </span>
-                    <span className="absolute inset-y-0 right-0 flex items-center pr-4 pointer-events-none">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="11"
-                        height="7"
-                        fill="none">
-                        <path
-                          fill="#333"
-                          fillRule="evenodd"
-                          d="M5.25 7L0 0h10.5L5.25 7z"
-                          clipRule="evenodd"></path>
-                      </svg>
-                    </span>
-                  </Listbox.Button>
-                  <Transition
-                    as={Fragment}
-                    leave="transition ease-in duration-100"
-                    leaveFrom="opacity-100"
-                    leaveTo="opacity-0">
-                    <Listbox.Options className="absolute w-full bg-white focus:outline-none">
-                      {dropdownOptions.map((option) => (
-                        <Listbox.Option
-                          key={option}
-                          className="relative py-2 text-sm text-center capitalize border-2 border-t-0 border-black focus:outline-none"
-                          value={option}>
-                          {option}
-                        </Listbox.Option>
-                      ))}
-                    </Listbox.Options>
-                  </Transition>
-                </div>
-              </Listbox>
-            </div>
-          )}
-        </div>
-
-        <div
-          className={`flex flex-nowrap overflow-x-auto md:gap-5 md:grid ${
-            listView === "grid"
-              ? "md:grid-cols-2 lg:grid-cols-3 md:gap-7"
-              : "md:grid-cols-1"
-          }`}>
-          {data?.map((celebrity) => (
-            <CelebrityCard
-              key={celebrity._id}
-              celebrity={celebrity}
-              listView={listView}
-            />
-          ))}
-        </div>
+        <GridCelebrities celebrities={data} />
         {/* CTA */}
         <div className="relative mt-6 text-center bg-cover">
           <Image
