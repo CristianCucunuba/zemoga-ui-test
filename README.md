@@ -20,7 +20,7 @@ You can use Mongo Atlas for simplicity to create your database, register and acc
 
 You can find more detail explain [here](https://docs.atlas.mongodb.com/getting-started)
 
-### Run the Project
+### Clone the Project
 
 ```bash
   git clone https://github.com/CristianCucunuba/zemoga-ui-test.git
@@ -46,6 +46,12 @@ Run the project
 ```bash
   npm test
 ```
+## Result 
+![image](https://user-images.githubusercontent.com/8785633/121229906-2a743900-c854-11eb-91c5-cec4993291ce.png)
+
+### Lighhouse Score 🥳
+![image](https://user-images.githubusercontent.com/8785633/121229810-10d2f180-c854-11eb-8e88-97b9efd36323.png)
+
 
 ## Built with:
 
